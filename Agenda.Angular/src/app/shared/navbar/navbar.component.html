@@ -1,0 +1,10 @@
+<mat-toolbar color="primary" class="navbar">
+  <div class="nav-logo" routerLink="home">
+    <h1>LabAgenda</h1>
+  </div>
+  <div fxLayoutGap="1.5em" class="navbar-items">
+    <button mat-button *ngFor="let item of items" [routerLink]="item.url" routerLinkActive="navbar-selected">
+      {{item.name}}
+    </button>
+  </div>
+</mat-toolbar>
