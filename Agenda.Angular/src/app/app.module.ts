@@ -7,14 +7,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 import { MainLayoutModule } from './shared/main-layout/main-layout.module';
+import { HomeModule } from './pages/home/home.module';
+import { LoginModule } from './pages/login/login.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    HomeModule,
+    LoginModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MainLayoutModule
