@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiBaseError } from 'src/app/shared/classes/api/api-base-error';
+import { AuthUser } from 'src/app/shared/classes/entities/auth-user';
 import { AuthService } from 'src/app/shared/services/auth-service/auth.service';
 import { ErrorHandler } from 'src/app/shared/utils/error-handler';
 
@@ -37,12 +38,14 @@ export class LoginComponent implements OnInit {
     }
     return valid
   }
-  
+
   async loginAsync(): Promise<void>{
     try {
       if(this.isFormValid()){
         console.log("Formulario valido");
-        
+        const data = this.form.value as AuthUser
+        const { token } = await this.authService.loginAsync(data); 
+        console.log(token);
       }
     } catch (error) {
       this.errorHandler.apiErrorHandler(this.snackBar,error as ApiBaseError)      
