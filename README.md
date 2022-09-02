@@ -1,2 +1,2 @@
 # Agenda_Angular
-Front end do sistema de Agenda
+Front end em Angular do sistema de Agenda
