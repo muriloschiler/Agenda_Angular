@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ApiBaseError } from 'src/app/shared/classes/api/api-base-error';
 import { AuthUser } from 'src/app/shared/classes/entities/auth-user';
 import { AuthService } from 'src/app/shared/services/auth-service/auth.service';
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private authService : AuthService,
-    private errorHandler: ErrorHandler
+    private errorHandler: ErrorHandler,
+    private router:Router
   ) {
     this.form = this.formBuilder.group({
       email: [null,[Validators.required,Validators.email]],
@@ -45,7 +47,9 @@ export class LoginComponent implements OnInit {
         console.log("Formulario valido");
         const data = this.form.value as AuthUser
         const { token } = await this.authService.loginAsync(data); 
-        console.log(token);
+        this.authService.setToken(token);
+        this.router.navigate(['dashboard','home'])
+        
       }
     } catch (error) {
       this.errorHandler.apiErrorHandler(this.snackBar,error as ApiBaseError)      
