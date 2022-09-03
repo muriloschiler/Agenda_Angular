@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { JwtToken } from '../../classes/api/jwt-token';
-import { AuthUser } from '../../classes/entities/auth-user';
+import { JwtToken } from '../classes/api/jwt-token';
+import { AuthUser } from '../classes/entities/auth-user';
 import jwtDecode from 'jwt-decode';
-import { TokenProps } from '../../classes/auth/token-props';
+import { TokenProps } from '../classes/auth/token-props';
 
 @Injectable({
   providedIn: 'root'

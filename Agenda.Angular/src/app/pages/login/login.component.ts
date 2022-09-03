@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ApiBaseError } from 'src/app/shared/classes/api/api-base-error';
 import { AuthUser } from 'src/app/shared/classes/entities/auth-user';
-import { AuthService } from 'src/app/shared/services/auth-service/auth.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ErrorHandler } from 'src/app/shared/utils/error-handler';
 
 @Component({
