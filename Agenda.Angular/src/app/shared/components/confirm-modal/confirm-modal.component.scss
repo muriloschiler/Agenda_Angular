@@ -1,0 +1,12 @@
+.confirm-dialog-container {
+    min-width: 30vw;
+    min-height: 12vh;
+    font-size: 17px;
+    .confirm-dialog-title {
+      font-weight: 500;
+      span {
+        margin-left: .5em;
+      }
+    }
+  }
+  

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ApiBaseError } from 'src/app/shared/classes/api/api-base-error';
 import { AuthUser } from 'src/app/shared/classes/entities/auth-user';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { ErrorHandler } from 'src/app/shared/utils/error-handler';
+import { ErrorHandlerService } from 'src/app/shared/services/Error/error-handler.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private authService : AuthService,
-    private errorHandler: ErrorHandler,
+    private errorHandler: ErrorHandlerService,
     private router:Router
   ) {
     this.form = this.formBuilder.group({
