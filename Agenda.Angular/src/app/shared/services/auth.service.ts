@@ -16,7 +16,7 @@ export class AuthService {
   constructor( private http: HttpClient ) { }
 
   async loginAsync(body: AuthUser): Promise<JwtToken>{
-    const token = this.http.post<JwtToken>(`${this.env.apiUrl}login`,body);
+    const token = this.http.post<JwtToken>(`${this.env.apiUrl}/login`,body);
     return lastValueFrom(token);
   }
   
