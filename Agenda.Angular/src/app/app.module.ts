@@ -9,6 +9,7 @@ import { MainLayoutComponent } from './shared/main-layout/main-layout.component'
 import { MainLayoutModule } from './shared/main-layout/main-layout.module';
 import { HomeModule } from './pages/home/home.module';
 import { LoginModule } from './pages/login/login.module';
+import { AgendaModule } from './agenda/agenda.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { LoginModule } from './pages/login/login.module';
     BrowserModule,
     HomeModule,
     LoginModule,
+    AgendaModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MainLayoutModule
