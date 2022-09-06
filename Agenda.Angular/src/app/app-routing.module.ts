@@ -1,8 +1,10 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AgendaComponent } from './agenda/agenda.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { HttpInterceptorService } from './shared/interceptors/http-interceptor.service';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 
 const routes: Routes = [
@@ -21,6 +23,13 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true,
+    }
+  ]
 })
 export class AppRoutingModule { }

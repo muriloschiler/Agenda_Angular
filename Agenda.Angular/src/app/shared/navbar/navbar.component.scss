@@ -1,0 +1,18 @@
+@import "../../../styles/theme.scss";
+@import "~@angular/material/theming";
+
+.navbar {
+  -webkit-box-shadow: 5px 5px 29px -7px rgba(0,0,0,0.77);
+  box-shadow: 5px 5px 29px -7px rgba(0,0,0,0.77);
+}
+
+.nav-logo {
+  cursor: pointer;
+}
+
+.navbar-items {
+  margin-left: 3em;
+  .navbar-selected {
+    background-color: map-get($agenda-primary, $key: 200);
+  }
+}

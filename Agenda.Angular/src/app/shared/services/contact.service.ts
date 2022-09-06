@@ -8,7 +8,7 @@ import { ApiBaseService } from './core/api-base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ContactServiceService extends ApiBaseService<Contact> {
+export class ContactService extends ApiBaseService<Contact> {
 
   constructor(
     protected override http: HttpClient

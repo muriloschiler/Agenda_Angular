@@ -5,7 +5,7 @@ import { ApiBaseError } from '../shared/classes/api/api-base-error';
 import { ApiBaseResponse } from '../shared/classes/api/api-base-response';
 import { Contact } from '../shared/classes/entities/contact';
 import { QueryParams } from '../shared/classes/params/query-params';
-import { ContactServiceService } from '../shared/services/contact-service.service';
+import { ContactService } from '../shared/services/contact.service';
 import { ErrorHandlerService } from '../shared/services/Error/error-handler.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class AgendaComponent implements OnInit {
   page!: ApiBaseResponse<Contact>
   
   constructor(
-    private contactServiceService: ContactServiceService,
+    private contactService: ContactService,
     private errorHandlerService: ErrorHandlerService,
     private snackBar: MatSnackBar) { }
 
@@ -28,7 +28,7 @@ export class AgendaComponent implements OnInit {
 
   async getPageAsync(params = new QueryParams()):Promise<void>{
     try {
-      this.page = await this.contactServiceService.GetAsync();
+      this.page = await this.contactService.GetAsync();
     } catch (error) {
       this.errorHandlerService.apiErrorHandler(this.snackBar,error as ApiBaseError)
     }
