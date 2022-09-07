@@ -20,9 +20,9 @@ import { AgendaModule } from './agenda/agenda.module';
     HomeModule,
     LoginModule,
     AgendaModule,
-    AppRoutingModule,
+    MainLayoutModule,
     BrowserAnimationsModule,
-    MainLayoutModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

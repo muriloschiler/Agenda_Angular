@@ -1,4 +1,4 @@
-export class ApiBaseResponse<T> {
+export class ApiPaginationResponse<T> {
     data!: T[]
     skip!:number 
     take!:number

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiBaseError } from '../shared/classes/api/api-base-error';
-import { ApiBaseResponse } from '../shared/classes/api/api-base-response';
+import { ApiPaginationResponse } from '../shared/classes/api/api-pagination-response';
 import { Contact } from '../shared/classes/entities/contact';
 import { QueryParams } from '../shared/classes/params/query-params';
 import { ContactService } from '../shared/services/contact.service';
@@ -15,7 +15,7 @@ import { ErrorHandlerService } from '../shared/services/Error/error-handler.serv
 })
 export class AgendaComponent implements OnInit {
 
-  page!: ApiBaseResponse<Contact>
+  page!: ApiPaginationResponse<Contact>
   
   constructor(
     private contactService: ContactService,
@@ -33,6 +33,7 @@ export class AgendaComponent implements OnInit {
       this.errorHandlerService.apiErrorHandler(this.snackBar,error as ApiBaseError)
     }
   }
+  
   async changePageAsync(event: PageEvent): Promise<void> {
     const params = {
       take: event.pageSize,
