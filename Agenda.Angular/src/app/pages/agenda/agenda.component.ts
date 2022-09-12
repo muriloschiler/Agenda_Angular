@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ApiBaseError } from '../shared/classes/api/api-base-error';
-import { ApiPaginationResponse } from '../shared/classes/api/api-pagination-response';
-import { Contact } from '../shared/classes/entities/contact';
-import { QueryParams } from '../shared/classes/params/query-params';
-import { ContactService } from '../shared/services/contact.service';
-import { ErrorHandlerService } from '../shared/services/Error/error-handler.service';
+import { ModalService } from 'src/app/shared/components/modal/services/modal.service';
+import { ApiBaseError } from '../../shared/classes/api/api-base-error';
+import { ApiPaginationResponse } from '../../shared/classes/api/api-pagination-response';
+import { Contact } from '../../shared/classes/entities/contact';
+import { QueryParams } from '../../shared/classes/params/query-params';
+import { ContactService } from '../../shared/services/contact.service';
+import { ErrorHandlerService } from '../../shared/services/Error/error-handler.service';
 
 @Component({
   selector: 'app-agenda',
@@ -14,13 +15,14 @@ import { ErrorHandlerService } from '../shared/services/Error/error-handler.serv
   styleUrls: ['./agenda.component.scss']
 })
 export class AgendaComponent implements OnInit {
-
-  page!: ApiPaginationResponse<Contact>
   
+  page!: ApiPaginationResponse<Contact>
+
   constructor(
     private contactService: ContactService,
     private errorHandlerService: ErrorHandlerService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private modalService: ModalService) { }
 
   async ngOnInit() {
     this.getPageAsync()
@@ -45,5 +47,4 @@ export class AgendaComponent implements OnInit {
   callAgendaFormModal(id:number){
     
   }
-
 }

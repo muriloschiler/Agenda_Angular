@@ -9,8 +9,7 @@ import { MainLayoutComponent } from './shared/main-layout/main-layout.component'
 import { MainLayoutModule } from './shared/main-layout/main-layout.module';
 import { HomeModule } from './pages/home/home.module';
 import { LoginModule } from './pages/login/login.module';
-import { AgendaModule } from './agenda/agenda.module';
-import { ContactFormModule } from './shared/contact-form/contact-form.module';
+import { AgendaModule } from './pages/agenda/agenda.module';
 
 @NgModule({
   declarations: [
@@ -23,8 +22,7 @@ import { ContactFormModule } from './shared/contact-form/contact-form.module';
     AgendaModule,
     MainLayoutModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
-    ContactFormModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

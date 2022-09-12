@@ -19,11 +19,13 @@ import { ConfirmModalModule } from 'src/app/shared/components/confirm-modal/conf
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ContactFormModule } from '../../shared/components/contact-form/contact-form.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ConfirmModalModule,
+    ContactFormModule,
     RouterModule,
     HttpClientModule,
     FlexLayoutModule,
