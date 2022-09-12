@@ -10,6 +10,7 @@ import { MainLayoutModule } from './shared/main-layout/main-layout.module';
 import { HomeModule } from './pages/home/home.module';
 import { LoginModule } from './pages/login/login.module';
 import { AgendaModule } from './agenda/agenda.module';
+import { ContactFormModule } from './shared/contact-form/contact-form.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AgendaModule } from './agenda/agenda.module';
     AgendaModule,
     MainLayoutModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ContactFormModule
   ],
   providers: [],
   bootstrap: [AppComponent]

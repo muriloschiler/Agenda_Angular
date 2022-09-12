@@ -33,13 +33,17 @@ export class AgendaComponent implements OnInit {
       this.errorHandlerService.apiErrorHandler(this.snackBar,error as ApiBaseError)
     }
   }
-  
+
   async changePageAsync(event: PageEvent): Promise<void> {
     const params = {
       take: event.pageSize,
       skip: event.pageIndex * event.pageSize,
     } as QueryParams;
     await this.getPageAsync(params);
+  }
+
+  callAgendaFormModal(id:number){
+    
   }
 
 }

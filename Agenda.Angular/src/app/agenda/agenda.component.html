@@ -1,9 +1,12 @@
 <div>
   <div>
       <mat-grid-list cols="3" rowHeight="3:2">
+        
         <mat-grid-tile *ngFor="let item of page.data">
           <mat-card class="contact-card" fxLayout="column">
+            
             <mat-card-title>{{item.name}}</mat-card-title>
+            
             <mat-expansion-panel hideToggle>
               <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -15,17 +18,20 @@
                 <p>Descrição: <strong>{{phone.description}}</strong></p>
               </div>
             </mat-expansion-panel>
+
             <mat-card-actions class="card-btns">
-              <button mat-icon-button color="accent">
+              <button mat-icon-button color="accent" (click)="callAgendaFormModal(item.id)">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button color="warn">
                 <mat-icon>delete</mat-icon>
               </button>
             </mat-card-actions>
+          
           </mat-card>
         </mat-grid-tile>
       </mat-grid-list>
+
       <mat-paginator [length]="page.total" (page)="changePageAsync($event)" [pageSize]="6" class="paginator">
       </mat-paginator>
   </div>
