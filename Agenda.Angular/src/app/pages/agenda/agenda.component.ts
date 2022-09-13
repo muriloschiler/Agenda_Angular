@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ContactFormComponent } from 'src/app/shared/components/contact-form/contact-form.component';
+import { ModalConfig } from 'src/app/shared/components/modal/classes/modal-config';
 import { ModalService } from 'src/app/shared/components/modal/services/modal.service';
 import { ApiBaseError } from '../../shared/classes/api/api-base-error';
 import { ApiPaginationResponse } from '../../shared/classes/api/api-pagination-response';
@@ -8,6 +10,7 @@ import { Contact } from '../../shared/classes/entities/contact';
 import { QueryParams } from '../../shared/classes/params/query-params';
 import { ContactService } from '../../shared/services/contact.service';
 import { ErrorHandlerService } from '../../shared/services/Error/error-handler.service';
+import { AgendaFormData } from './classes/agenda-form-data';
 
 @Component({
   selector: 'app-agenda',
@@ -15,7 +18,7 @@ import { ErrorHandlerService } from '../../shared/services/Error/error-handler.s
   styleUrls: ['./agenda.component.scss']
 })
 export class AgendaComponent implements OnInit {
-  
+
   page!: ApiPaginationResponse<Contact>
 
   constructor(
@@ -44,7 +47,18 @@ export class AgendaComponent implements OnInit {
     await this.getPageAsync(params);
   }
 
-  callAgendaFormModal(id:number){
-    
+  callAgendaFormModal(id?:number){
+    const config = new ModalConfig<AgendaFormData,ContactFormComponent>();
+    config.componentToRender = ContactFormComponent;
+    config.title = `${id ? 'Editar' : 'Adicionar'} Contato`;
+    config.icon = 'people';
+    config.data = { id } as AgendaFormData;
+
+    this.modalService.open(config);
+    this.modalService.closed.subscribe(async (result) => {
+      if (result) {
+        await this.getPageAsync();
+      }
+    });
   }
 }
