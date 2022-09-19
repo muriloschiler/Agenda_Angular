@@ -20,12 +20,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ContactFormModule } from '../../shared/components/contact-form/contact-form.module';
+import { ModalModule } from 'src/app/shared/components/modal/modal.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    ConfirmModalModule,
+    ConfirmModalModule,   
     ContactFormModule,
+    ModalModule,
     RouterModule,
     HttpClientModule,
     FlexLayoutModule,
