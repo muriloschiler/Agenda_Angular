@@ -1,3 +1,8 @@
-<p>
-  contact-form works!
-</p>
+<app-modal [formGroup]="form">
+  <div fxLayout="column" fxLayoutGap="0.5em">
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input  matInput type="text" formControlName="name">
+    </mat-form-field>
+  </div>
+</app-modal>

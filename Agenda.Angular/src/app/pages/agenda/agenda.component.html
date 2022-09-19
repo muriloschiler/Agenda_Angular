@@ -1,12 +1,17 @@
 <div>
+  <div fxLayoutGap="1em">
+    <button class="action-btn" mat-raised-button color="accent" (click)="callAgendaFormModal()">
+      <mat-icon>add</mat-icon>
+      <span>Criar contato</span>
+    </button>
+  </div>
+
   <div>
-      <mat-grid-list cols="3" rowHeight="3:2">
-        
+      <mat-grid-list cols="3" rowHeight="3:2">      
         <mat-grid-tile *ngFor="let item of page.data">
           <mat-card class="contact-card" fxLayout="column">
             
             <mat-card-title>{{item.name}}</mat-card-title>
-            
             <mat-expansion-panel hideToggle>
               <mat-expansion-panel-header>
                 <mat-panel-title>

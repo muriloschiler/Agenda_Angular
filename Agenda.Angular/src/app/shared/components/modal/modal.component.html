@@ -1,6 +1,13 @@
-<p>
-  modal works!
-</p>
+<div class="modal-container">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon>{{config.icon || 'add'}}</mat-icon>
+      <span class="modal-title">{{config.title}}</span>
+    </div>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 <div class="modal-content">
   <ng-content></ng-content>
 </div>

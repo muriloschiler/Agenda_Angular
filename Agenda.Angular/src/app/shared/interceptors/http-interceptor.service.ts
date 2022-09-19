@@ -18,7 +18,6 @@ constructor(
 ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    debugger
     const token = this.authService.getToken();
     if (token) {
       req = this.setToken(req, token);

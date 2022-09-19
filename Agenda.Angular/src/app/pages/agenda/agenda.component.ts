@@ -19,7 +19,7 @@ import { AgendaFormData } from './classes/agenda-form-data';
 })
 export class AgendaComponent implements OnInit {
 
-  page!: ApiPaginationResponse<Contact>
+  page: ApiPaginationResponse<Contact> = new ApiPaginationResponse<Contact>()
 
   constructor(
     private contactService: ContactService,
