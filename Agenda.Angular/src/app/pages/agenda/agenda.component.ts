@@ -8,7 +8,7 @@ import { ApiBaseError } from '../../shared/classes/api/api-base-error';
 import { ApiPaginationResponse } from '../../shared/classes/api/api-pagination-response';
 import { Contact } from '../../shared/classes/entities/contact';
 import { QueryParams } from '../../shared/classes/params/query-params';
-import { ContactService } from '../../shared/services/contact.service';
+import { AgendaService } from '../../shared/services/agenda.service';
 import { ErrorHandlerService } from '../../shared/services/Error/error-handler.service';
 import { AgendaFormData } from './classes/agenda-form-data';
 
@@ -19,10 +19,10 @@ import { AgendaFormData } from './classes/agenda-form-data';
 })
 export class AgendaComponent implements OnInit {
 
-  page!: ApiPaginationResponse<Contact>
+  page: ApiPaginationResponse<Contact> = new ApiPaginationResponse<Contact>()
 
   constructor(
-    private contactService: ContactService,
+    private agendaService: AgendaService,
     private errorHandlerService: ErrorHandlerService,
     private snackBar: MatSnackBar,
     private modalService: ModalService) { }
@@ -33,7 +33,7 @@ export class AgendaComponent implements OnInit {
 
   async getPageAsync(params = new QueryParams()):Promise<void>{
     try {
-      this.page = await this.contactService.GetAsync();
+      this.page = await this.agendaService.GetAsync();
     } catch (error) {
       this.errorHandlerService.apiErrorHandler(this.snackBar,error as ApiBaseError)
     }
