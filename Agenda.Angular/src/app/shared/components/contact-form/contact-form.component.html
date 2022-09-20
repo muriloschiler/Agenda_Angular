@@ -14,6 +14,28 @@
       <mat-label>Nome</mat-label>
       <input  matInput type="text" formControlName="name">
     </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="addPhoneForm()">
+      Adicionar Telefone
+    </button>
+
+    <ng-container formArrayName="phones">
+      <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="0.5em" *ngFor="let _ of phonesFieldArray.controls; let i = index" [formGroupName]="i">
+        <mat-form-field appearance="outline">
+          <mat-label>Tipo de telefone</mat-label>
+          <mat-select formControlName="phoneTypeId">
+            <mat-option *ngFor="let item of phoneTypes" [value]="item.id">{{item.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Número de telefone</mat-label>
+          <input [dropSpecialCharacters]="false" matInput type="text" [mask]="getMaskPhone(i)" formControlName="formattedNumber">
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+    
   
   </div>
 </app-modal>

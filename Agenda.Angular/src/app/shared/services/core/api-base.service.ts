@@ -21,4 +21,9 @@ export class ApiBaseService<T> {
     return lastValueFrom(page)
   }
 
+  public GetByIdAsync(id:number):Promise<T> {
+    const entity = this.http.get<T>(`${this.env.apiUrl}/${this.route}/${id}`) 
+    return lastValueFrom(entity)
+  }
+
 }

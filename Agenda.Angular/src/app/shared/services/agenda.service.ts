@@ -16,7 +16,7 @@ export class AgendaService extends ApiBaseService<Contact> {
     super('contact',http);
   }
 
-  public GetPhoneTypes():Promise<Enumeration[]> {
+  public getPhoneTypes():Promise<Enumeration[]> {
     const phoneTypes = this.http.get<Enumeration[]>(`${this.env.apiUrl}/${this.route}/phone-types`) 
     return lastValueFrom(phoneTypes)
   }
