@@ -2,9 +2,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ReducedUser } from '../../classes/entities/user/reduced-user';
+import { User } from '../../classes/entities/user/user';
 import { AgendaAdminService } from '../../services/agenda-admin.service';
 import { AgendaService } from '../../services/agenda.service';
 import { ApiBaseService } from '../../services/core/api-base.service';
+import { UserService } from '../../services/user.service';
 import { ModalConfig } from '../modal/classes/modal-config';
 
 @Component({
@@ -18,18 +21,19 @@ export class ContactFormComponent implements OnInit {
   isAdmin = false;
   isEditMode=false;
   service!:ApiBaseService<any>;
-
+  reducedUser!:ReducedUser[];
   constructor(
     @Inject(MAT_DIALOG_DATA) public config: ModalConfig,
     private formBuilder: FormBuilder,
     private agendaService: AgendaService,
     private agendaAdminService: AgendaAdminService,
+    private userService: UserService,
     private router: Router
   ) { 
     this.form = this.formBuilder.group({
       id:[null],
       name: [null, [Validators.required]],
-      phones: this.formBuilder.array([]),
+      phones: this.formBuilder.array([])
     })
   }
 
@@ -45,12 +49,17 @@ export class ContactFormComponent implements OnInit {
     this.isAdmin = RegExp(`\/admin\/agenda`, 'gi').test(this.router.url);
     if (this.isAdmin) {
       this.form.addControl('userId', new FormControl(null, [Validators.required]));
+      await this.getAllUsersAsync();
     }
     this.service = this.isAdmin ? this.agendaAdminService : this.agendaService;
   }
 
   async getContactAsync(): Promise<void> {
     console.log("EDIT MODE")
+  }
+
+  async getAllUsersAsync():Promise<void>{
+    this.reducedUser = await this.userService.getReducedUsers();
   }
 
 }

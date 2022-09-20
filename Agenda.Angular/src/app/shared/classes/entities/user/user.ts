@@ -1,5 +1,5 @@
-import { Enumeration } from "./core/enumeration";
-import { Register } from "./core/register";
+import { Enumeration } from "../core/enumeration";
+import { Register } from "../core/register";
 
 export class User extends Register{
     name!: string;

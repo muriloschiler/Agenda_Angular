@@ -1,8 +1,19 @@
 <app-modal [formGroup]="form">
   <div fxLayout="column" fxLayoutGap="0.5em">
+    
+    <ng-container *ngIf="isAdmin">
+      <mat-form-field appearance="outline">
+        <mat-label>Usuário</mat-label>
+        <mat-select formControlName="userId">
+          <mat-option *ngFor="let item of reducedUser" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    
     <mat-form-field appearance="outline">
       <mat-label>Nome</mat-label>
       <input  matInput type="text" formControlName="name">
     </mat-form-field>
+  
   </div>
 </app-modal>
