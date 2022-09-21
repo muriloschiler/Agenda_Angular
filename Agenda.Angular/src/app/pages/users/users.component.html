@@ -1,0 +1,18 @@
+<div>
+    <div fxLayoutGap="1em">
+        <button class="action-btn" mat-raised-button color="accent" (click)="goToUsersForm()" >
+            <mat-icon>add</mat-icon>
+            <span>Novo Usuário</span>
+          </button>
+          <button class="action-btn" mat-raised-button color="accent" (click)="refreshTableAsync()">
+            <mat-icon>refresh</mat-icon>
+            <span>Recarregar</span>
+          </button>
+        </div>
+</div>
+<div class="user-table-container">
+    <app-table [menuOptions]="tableOptions" [columns]="columns" [data]="users"></app-table>
+    <mat-paginator [length]="data.total" (page)="changePageAsync($event)" [pageSize]="data.take" class="paginator" [disabled]="isLoading">
+    </mat-paginator>
+</div>
+  

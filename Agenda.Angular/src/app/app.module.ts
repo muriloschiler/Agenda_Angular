@@ -10,6 +10,7 @@ import { MainLayoutModule } from './shared/main-layout/main-layout.module';
 import { HomeModule } from './pages/home/home.module';
 import { LoginModule } from './pages/login/login.module';
 import { AgendaModule } from './pages/agenda/agenda.module';
+import { UsersModule } from './pages/users/users.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AgendaModule } from './pages/agenda/agenda.module';
     HomeModule,
     LoginModule,
     AgendaModule,
+    UsersModule,
     MainLayoutModule,
     BrowserAnimationsModule,
     AppRoutingModule
