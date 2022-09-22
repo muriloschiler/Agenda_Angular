@@ -18,7 +18,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class UsersComponent implements OnInit {
 
-  page! : ApiPaginationResponse<User>;
+  page : ApiPaginationResponse<User> = new ApiPaginationResponse<User>();
   users!: User[];
   tableOptions!: TableMenuOptions;
   columns: any[] = [];
@@ -35,6 +35,13 @@ export class UsersComponent implements OnInit {
     await this.refreshTableAsync();
   }
 
+  async refreshTableAsync(): Promise<void> {
+    await this.getPageAsync();
+    this.setTableConfig();
+    this.setColumns();
+    this.cdRef.detectChanges();
+  }
+
   async getPageAsync(params = new QueryParams()):Promise<void>{
     try {
       this.page = await this.userService.GetAsync();
@@ -42,13 +49,6 @@ export class UsersComponent implements OnInit {
     } catch (error) {
       this.errorHandlerService.apiErrorHandler(this.snackBar,error as ApiBaseError)
     }
-  }
-
-  async refreshTableAsync(): Promise<void> {
-    await this.getPageAsync();
-    this.setTableConfig();
-    this.setColumns();
-    this.cdRef.detectChanges();
   }
 
   setTableConfig(): void {

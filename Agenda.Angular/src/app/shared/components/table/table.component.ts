@@ -1,0 +1,55 @@
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { Register } from '../../classes/entities/core/register';
+import { TableMenuOptions } from './classes/table-menu-options';
+
+@Component({
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class TableComponent implements OnInit {
+
+  @Input() menuOptions!:TableMenuOptions;
+  @Input() columns: any[][] = [];
+  @Input() data: Register[] = [];
+  
+  dataSource!: MatTableDataSource<Register>;
+  displayedColumns: string[] = [];
+
+  constructor(
+    private cdRef: ChangeDetectorRef
+  ) { }
+
+  ngOnInit(): void {
+    this.refresh();
+  }
+
+  refresh(): void {
+    debugger
+    if (this.data) {
+      this.dataSource = new MatTableDataSource(this.data);
+      this.getKeys(this.data);
+    }
+    this.cdRef.detectChanges();
+  }
+
+  getKeys(data: any[]): void {
+    if (data && data.length > 0) {
+      this.displayedColumns = this.columns.map(c => c[0])
+      this.displayedColumns = this.displayedColumns.concat(['actions']);
+    }
+  }
+
+  onEdit(id: number): void {
+    this.menuOptions.editAction(id);
+    this.refresh();
+  }
+
+  onDelete(id: number): void {
+    this.menuOptions.deleteAction(id);
+    this.refresh();
+  }
+
+}

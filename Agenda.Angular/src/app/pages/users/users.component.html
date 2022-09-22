@@ -12,7 +12,7 @@
 </div>
 <div class="user-table-container">
     <app-table [menuOptions]="tableOptions" [columns]="columns" [data]="users"></app-table>
-    <mat-paginator [length]="data.total" (page)="changePageAsync($event)" [pageSize]="data.take" class="paginator" [disabled]="isLoading">
+    <mat-paginator [length]="page.total" (page)="changePageAsync($event)" [pageSize]="page.take" class="paginator" >
     </mat-paginator>
 </div>
   

@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmModalModule } from 'src/app/shared/components/confirm-modal/confirm-modal.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { TableModule } from 'src/app/shared/components/table/table.module';
 
 
 
@@ -24,6 +25,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   ],
   imports: [
     CommonModule,
+    TableModule,
     RouterModule,
     HttpClientModule,
     FlexLayoutModule,
