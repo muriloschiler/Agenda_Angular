@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Register } from '../../classes/entities/core/register';
 import { TableMenuOptions } from './classes/table-menu-options';
@@ -9,7 +9,7 @@ import { TableMenuOptions } from './classes/table-menu-options';
   styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit , OnChanges {
 
   @Input() menuOptions!:TableMenuOptions;
   @Input() columns: any[][] = [];
@@ -26,7 +26,14 @@ export class TableComponent implements OnInit {
     this.refresh();
   }
 
+  ngOnChanges(changes: SimpleChanges | this): void {
+    if (changes.data) {
+      this.refresh();
+    }
+  }
+
   refresh(): void {
+    
     if (this.data) {
       this.dataSource = new MatTableDataSource(this.data);
       this.getKeys(this.data);
