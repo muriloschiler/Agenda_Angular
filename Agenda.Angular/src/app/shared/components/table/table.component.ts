@@ -27,7 +27,6 @@ export class TableComponent implements OnInit {
   }
 
   refresh(): void {
-    debugger
     if (this.data) {
       this.dataSource = new MatTableDataSource(this.data);
       this.getKeys(this.data);

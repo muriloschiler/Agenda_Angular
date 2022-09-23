@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { UsersReportComponent } from './pages/users-report/users-report.component';
 import { UsersComponent } from './pages/users/users.component';
 import { AuthAdminGuard } from './shared/guards/auth-admin.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -22,7 +23,8 @@ const routes: Routes = [
         path:'admin',
         canActivate:[AuthAdminGuard],
         children:[
-          {path:'users',component:UsersComponent}
+          {path:'users',component:UsersComponent},
+          {path:'users/report',component:UsersReportComponent}
         ]
       }
     ]
