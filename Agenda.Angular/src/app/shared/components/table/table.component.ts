@@ -49,13 +49,17 @@ export class TableComponent implements OnInit , OnChanges {
   }
 
   onEdit(id: number): void {
-    this.menuOptions.editAction(id);
-    this.refresh();
+    if(this.menuOptions != null){
+      this.menuOptions.editAction(id);
+      this.refresh();
+    }
   }
 
   onDelete(id: number): void {
-    this.menuOptions.deleteAction(id);
-    this.refresh();
+    if(this.menuOptions != null){
+      this.menuOptions.deleteAction(id);
+      this.refresh();
+    }
   }
 
 }

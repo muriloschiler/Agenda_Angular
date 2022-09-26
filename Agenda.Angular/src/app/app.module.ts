@@ -12,6 +12,7 @@ import { LoginModule } from './pages/login/login.module';
 import { AgendaModule } from './pages/agenda/agenda.module';
 import { UsersModule } from './pages/users/users.module';
 import { UsersReportComponent } from './pages/users-report/users-report.component';
+import { UsersReportModule } from './pages/users-report/users-report.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UsersReportComponent } from './pages/users-report/users-report.componen
     LoginModule,
     AgendaModule,
     UsersModule,
+    UsersReportModule,
     MainLayoutModule,
     BrowserAnimationsModule,
     AppRoutingModule

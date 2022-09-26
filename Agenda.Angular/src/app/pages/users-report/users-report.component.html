@@ -1,11 +1,5 @@
 <button (click)="makePDF()" >PDF</button>
     
 <div id="content" #content>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1> TABLE SETADA COM OS DADOS ESPERADOS DO RELATORIO</h1>
+    <app-table [columns]="columns" [data]="reportUsers"></app-table>
 </div>

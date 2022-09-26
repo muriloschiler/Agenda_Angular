@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ApiBaseError } from 'src/app/shared/classes/api/api-base-error';
 import { ApiPaginationResponse } from 'src/app/shared/classes/api/api-pagination-response';
 import { User } from 'src/app/shared/classes/entities/user/user';
@@ -26,6 +27,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private userService: UserService,
     private confirmModalService: ConfirmModalService,
+    private router:Router,
     private snackBar: MatSnackBar,
     private cdRef: ChangeDetectorRef,
     private errorHandlerService :ErrorHandlerService
@@ -66,6 +68,9 @@ export class UsersComponent implements OnInit {
   async goToUsersForm(id?:number):Promise<void> {
     console.log("Setando a modal com user form");
     
+  }
+  goToUsersReportPage(){
+    this.router.navigate(['dashboard/admin/users/report']);
   }
 
   setColumns(): void {
