@@ -44,7 +44,9 @@ export class TableComponent implements OnInit , OnChanges {
   getKeys(data: any[]): void {
     if (data && data.length > 0) {
       this.displayedColumns = this.columns.map(c => c[0])
-      this.displayedColumns = this.displayedColumns.concat(['actions']);
+      if(this.menuOptions != null){
+        this.displayedColumns = this.displayedColumns.concat(['actions']);
+      }
     }
   }
 

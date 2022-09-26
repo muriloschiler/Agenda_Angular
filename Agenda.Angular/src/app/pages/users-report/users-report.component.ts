@@ -41,7 +41,7 @@ export class UsersReportComponent implements OnInit {
   }
 
   async getReportAsync(){
-    this.reportUsers = await this.userService.getReportUsers();
+    this.reportUsers = await this.userService.getReportUsers();    
   }
 
   setColumns(): void {
