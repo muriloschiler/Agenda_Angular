@@ -13,6 +13,7 @@ import { AgendaModule } from './pages/agenda/agenda.module';
 import { UsersModule } from './pages/users/users.module';
 import { UsersReportComponent } from './pages/users/users-report/users-report.component';
 import { UsersReportModule } from './pages/users/users-report/users-report.module';
+import { AgendaAdminModule } from './pages/agenda-admin/agenda-admin.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UsersReportModule } from './pages/users/users-report/users-report.modul
     HomeModule,
     LoginModule,
     AgendaModule,
+    AgendaAdminModule,
     UsersModule,
     UsersReportModule,
     MainLayoutModule,

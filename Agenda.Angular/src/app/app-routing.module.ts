@@ -1,6 +1,8 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AgendaAdminComponent } from './pages/agenda-admin/agenda-admin.component';
+import { AgendaAdminModule } from './pages/agenda-admin/agenda-admin.module';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -23,6 +25,7 @@ const routes: Routes = [
         path:'admin',
         canActivate:[AuthAdminGuard],
         children:[
+          {path:'agenda',component:AgendaAdminComponent},
           {path:'users',component:UsersComponent},
           {path:'users/report',component:UsersReportComponent}
         ]
