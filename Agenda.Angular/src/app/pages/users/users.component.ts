@@ -7,6 +7,7 @@ import { ApiBaseError } from 'src/app/shared/classes/api/api-base-error';
 import { ApiPaginationResponse } from 'src/app/shared/classes/api/api-pagination-response';
 import { User } from 'src/app/shared/classes/entities/user/user';
 import { QueryParams } from 'src/app/shared/classes/params/query-params';
+import { ConfirmModalConfig } from 'src/app/shared/components/confirm-modal/classes/confirm-modal-config';
 import { ConfirmModalService } from 'src/app/shared/components/confirm-modal/services/confirm-modal.service';
 import { ModalConfig } from 'src/app/shared/components/modal/classes/modal-config';
 import { ModalService } from 'src/app/shared/components/modal/services/modal.service';
@@ -66,8 +67,18 @@ export class UsersComponent implements OnInit {
   }
 
   async deleteUsersAsync(id: number): Promise<void> {
-    console.log("Deletar Usuario");
-    
+    const config = {
+      title: 'Confirmar Exclusão',
+      message: 'Deseja realmente excluir esse usuário?',
+    } as ConfirmModalConfig;
+
+    this.confirmModalService.open(config)
+    this.confirmModalService.closed.subscribe(async (result) => {
+      if (result) {
+        await this.userService.deleteAsync(id);
+        await this.refreshTableAsync();
+      }
+    });
   }
 
   async goToUsersForm(id?:number):Promise<void> {

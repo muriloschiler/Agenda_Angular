@@ -68,7 +68,6 @@ export class UserFormComponent implements OnInit {
   async saveUserAsync(): Promise<void> {
     try {
       if (this.isFormValid()) {
-        debugger
         const data = this.form.value as User;
         data.id ?
           await this.userService.updateAsync(data, data.id):
