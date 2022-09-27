@@ -26,4 +26,21 @@ export class ApiBaseService<T> {
     return lastValueFrom(entity)
   }
 
+  createAsync(data: T): Promise<T> {
+    const body = Object.assign(data, {});
+    let response = this.http.post<T>(`${this.env.apiUrl}/${this.route}`, body);
+    return lastValueFrom(response);
+  }
+
+  updateAsync(data: T, id: number): Promise<T> {
+    const body = Object.assign(data, {})
+    let response = this.http.put<T>(`${this.env.apiUrl}/${this.route}/${id}`,body);
+    return lastValueFrom(response);;
+  }
+
+  deleteAsync(id: number): Promise<T> {
+    let response = this.http.delete<T>(`${this.env.apiUrl}/${this.route}/${id}`)
+    return lastValueFrom(response)
+  }
+
 }

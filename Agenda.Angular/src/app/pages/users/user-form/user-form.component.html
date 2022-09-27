@@ -1,0 +1,32 @@
+<app-modal [formGroup]="form">
+    <div fxLayout="column" fxLayoutGap="0.5em">
+      <mat-form-field appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input  matInput type="text" formControlName="name">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input  matInput type="email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input  matInput type="text" formControlName="username">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input matInput type="password" formControlName="password">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Cargo</mat-label>
+        <mat-select formControlName="userRoleId">
+          <mat-option *ngFor="let item of roles"  [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div  fxLayoutGap="1em">
+        <button mat-raised-button [disabled]="form.invalid" color="primary" (click)="saveUserAsync()" >Salvar</button>
+        <button mat-button mat-dialog-close>Cancelar</button>
+      </div>
+    </div>
+  </app-modal>
+  
+  

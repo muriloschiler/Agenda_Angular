@@ -2,15 +2,19 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { config } from 'rxjs';
 import { ApiBaseError } from 'src/app/shared/classes/api/api-base-error';
 import { ApiPaginationResponse } from 'src/app/shared/classes/api/api-pagination-response';
 import { User } from 'src/app/shared/classes/entities/user/user';
 import { QueryParams } from 'src/app/shared/classes/params/query-params';
 import { ConfirmModalService } from 'src/app/shared/components/confirm-modal/services/confirm-modal.service';
+import { ModalConfig } from 'src/app/shared/components/modal/classes/modal-config';
 import { ModalService } from 'src/app/shared/components/modal/services/modal.service';
 import { TableMenuOptions } from 'src/app/shared/components/table/classes/table-menu-options';
 import { ErrorHandlerService } from 'src/app/shared/services/Error/error-handler.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { UserFormData } from './classes/user-form-data';
+import { UserFormComponent } from './user-form/user-form.component';
 
 @Component({
   selector: 'app-users',
@@ -26,6 +30,7 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private modalService:ModalService,
     private confirmModalService: ConfirmModalService,
     private router:Router,
     private snackBar: MatSnackBar,
@@ -66,8 +71,18 @@ export class UsersComponent implements OnInit {
   }
 
   async goToUsersForm(id?:number):Promise<void> {
-    console.log("Setando a modal com user form");
-    
+    const config = new ModalConfig<UserFormData,UserFormComponent>();
+    config.data = {id} as UserFormData;
+    config.title = `${id ? 'Atualizar' : 'Criar'} usuário`;
+    config.icon = 'people';
+    config.componentToRender = UserFormComponent;
+
+    this.modalService.open(config);
+    this.modalService.closed.subscribe(async result=>{
+      if (result) {
+        await this.refreshTableAsync()
+      }
+    })
   }
   goToUsersReportPage(){
     this.router.navigate(['dashboard/admin/users/report']);
