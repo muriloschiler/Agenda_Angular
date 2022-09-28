@@ -1,5 +1,6 @@
 <div>
     <div fxLayoutGap="1em">
+        <app-search-input fxFlex="80" [config]="searchConfig"></app-search-input>
         <button class="action-btn" mat-raised-button color="accent" (click)="goToUsersForm()" >
             <mat-icon>add</mat-icon>
             <span>Novo Usuário</span>

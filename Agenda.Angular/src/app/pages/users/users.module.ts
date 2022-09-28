@@ -18,6 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { TableModule } from 'src/app/shared/components/table/table.module';
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserFormModule } from './user-form/user-form.module';
+import { SearchInputModule } from 'src/app/shared/components/search-input/search-input.module';
 
 
 
@@ -30,6 +31,7 @@ import { UserFormModule } from './user-form/user-form.module';
     UserFormModule,
     ModalModule,
     TableModule,
+    SearchInputModule,
     RouterModule,
     HttpClientModule,
     FlexLayoutModule,

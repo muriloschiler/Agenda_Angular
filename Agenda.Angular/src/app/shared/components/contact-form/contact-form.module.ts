@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMaskModule } from 'ngx-mask';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { NgxMaskModule } from 'ngx-mask';
     HttpClientModule,
     MatInputModule,
     MatSelectModule,
+    MatIconModule,
     NgxMaskModule.forRoot(),
   ],
   declarations: [ContactFormComponent],

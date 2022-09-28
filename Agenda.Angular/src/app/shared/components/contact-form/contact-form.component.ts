@@ -1,17 +1,20 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ApiBaseError } from '../../classes/api/api-base-error';
 import { Enumeration } from '../../classes/entities/core/enumeration';
 import { Phone } from '../../classes/entities/phone';
 import { ReducedUser } from '../../classes/entities/user/reduced-user';
-import { User } from '../../classes/entities/user/user';
 import { PhoneTypes } from '../../enums/phone-types';
 import { AgendaAdminService } from '../../services/agenda-admin.service';
 import { AgendaService } from '../../services/agenda.service';
 import { ApiBaseService } from '../../services/core/api-base.service';
+import { ErrorHandlerService } from '../../services/Error/error-handler.service';
 import { UserService } from '../../services/user.service';
 import { ModalConfig } from '../modal/classes/modal-config';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-contact-form',
@@ -24,8 +27,8 @@ export class ContactFormComponent implements OnInit {
   isAdmin = false;
   isEditMode=false;
   service!:ApiBaseService<any>;
-  reducedUser!:ReducedUser[];
-  phoneTypes!:Enumeration[]
+  reducedUsers!:ReducedUser[];
+  phoneTypes!:Enumeration[];
 
   get phonesFieldArray(): FormArray {
     return this.form.get('phones') as FormArray;
@@ -33,14 +36,18 @@ export class ContactFormComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public config: ModalConfig,
+    private matDialogRef: MatDialogRef<ModalComponent>,
     private formBuilder: FormBuilder,
     private agendaService: AgendaService,
     private agendaAdminService: AgendaAdminService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private cdRef: ChangeDetectorRef,
+    private errorHandlerService: ErrorHandlerService,
+    private snackBar: MatSnackBar,
   ) { 
     this.form = this.formBuilder.group({
-      id:[null],
+      id:[0],
       name: [null, [Validators.required]],
       phones: this.formBuilder.array([])
     })
@@ -74,13 +81,30 @@ export class ContactFormComponent implements OnInit {
     )
   }
 
+  removePhoneForm(index: number): void {
+    this.phonesFieldArray.removeAt(index);
+  }
+
   async getContactToUpdateAsync(): Promise<void> {
-    console.log("EDIT MODE")
+    try {
+      const data = await this.service.GetByIdAsync(this.config.data.id);
+      this.form.get('id')?.setValue(data.id);
+      this.form.get('name')?.setValue(data.name);
+      data.phones.forEach((x: Phone) => this.addPhoneForm(x));
+      if (this.isAdmin) {
+        this.form.get('userId')?.setValue(data.user.id);
+      }
+      this.cdRef.detectChanges();
+    } catch ({ error }) {
+      this.errorHandlerService.apiErrorHandler(this.snackBar, error as ApiBaseError)
+    }
   }
 
   private async getPhoneTypesAsync(): Promise<void> {
     this.phoneTypes = await this.agendaService.getPhoneTypes();
   }
+
+  
 
   getMaskPhone(index: number): string {
     return this.phonesFieldArray.at(index).get("phoneTypeId")?.value === PhoneTypes.Cellphone
@@ -89,7 +113,7 @@ export class ContactFormComponent implements OnInit {
   }
 
   private async getAllUsersAsync():Promise<void>{
-    this.reducedUser = await this.userService.getReducedUsers();
+    this.reducedUsers = await this.userService.getReducedUsers();
   }
   
   phoneValidator(control: AbstractControl): ValidationErrors | null {
@@ -99,4 +123,29 @@ export class ContactFormComponent implements OnInit {
     }
     return { formattedNumber: { value: control.value } }
   }
+
+  async saveContactAsync(): Promise<void> {
+    try {
+      if (this.isFormValid()) {
+        const data = this.form.value;
+        data.id ?
+          await this.service.updateAsync(data, data.id) :
+          await this.service.createAsync(data);
+        this.snackBar.open('Novo contato salvo com sucesso!', undefined, { duration: 3000 });
+        this.matDialogRef.close(true);
+      }
+    } catch ({ error }) {
+      this.errorHandlerService.apiErrorHandler(this.snackBar, error as ApiBaseError);
+    }
+  }
+
+  isFormValid(): boolean {
+    const valid = this.form.valid;
+    if (!valid) {
+      this.form.markAllAsTouched();
+      this.snackBar.open('Há campos inválidos no formulário!', undefined, { duration: 3000 });
+    }
+    return valid;
+  }
+
 }

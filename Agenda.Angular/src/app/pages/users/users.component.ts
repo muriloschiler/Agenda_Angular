@@ -11,6 +11,8 @@ import { ConfirmModalConfig } from 'src/app/shared/components/confirm-modal/clas
 import { ConfirmModalService } from 'src/app/shared/components/confirm-modal/services/confirm-modal.service';
 import { ModalConfig } from 'src/app/shared/components/modal/classes/modal-config';
 import { ModalService } from 'src/app/shared/components/modal/services/modal.service';
+import { SearchForm } from 'src/app/shared/components/search-input/classes/search-form';
+import { SearchInputConfig } from 'src/app/shared/components/search-input/classes/search-input-config';
 import { TableMenuOptions } from 'src/app/shared/components/table/classes/table-menu-options';
 import { ErrorHandlerService } from 'src/app/shared/services/Error/error-handler.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -28,6 +30,15 @@ export class UsersComponent implements OnInit {
   users!: User[];
   tableOptions!: TableMenuOptions;
   columns: any[] = [];
+
+  searchConfig =  { 
+    searchAction: (query) => this.searchAsync(query),
+    params: [
+      { label: "Nome", name: "name" },
+      { label: "Username", name: "username" },
+      { label: "E-mail", name: "email" },
+    ]
+  } as SearchInputConfig;
 
   constructor(
     private userService: UserService,
@@ -52,7 +63,7 @@ export class UsersComponent implements OnInit {
 
   async getPageAsync(params = new QueryParams()):Promise<void>{
     try {
-      this.page = await this.userService.GetAsync();
+      this.page = await this.userService.GetAsync(params);
       this.users = this.page.data
     } catch (error) {
       this.errorHandlerService.apiErrorHandler(this.snackBar,error as ApiBaseError)
@@ -114,6 +125,15 @@ export class UsersComponent implements OnInit {
       skip: event.pageIndex * event.pageSize,
     } as QueryParams;
     await this.getPageAsync(params);
+  }
+
+  async searchAsync(query: SearchForm): Promise<void> {
+    debugger
+    const params = {
+      [query.field]: query.value
+    } as QueryParams;
+    await this.getPageAsync(params);
+    this.cdRef.detectChanges();
   }
 }
 
